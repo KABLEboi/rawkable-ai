@@ -1,63 +1,81 @@
+"use client";
+
+import { motion } from "framer-motion";
+import SectionTitle from "@/components/ui/SectionTitle";
+
 const models = [
   {
-    name: "ChatGPT",
+    name: "GPT-5",
     company: "OpenAI",
-    color: "text-green-400",
+    color: "bg-green-500",
+    description: "Advanced reasoning, coding and creative writing.",
   },
   {
     name: "Claude",
     company: "Anthropic",
-    color: "text-orange-400",
+    color: "bg-orange-500",
+    description: "Excellent for long documents and deep analysis.",
   },
   {
     name: "Gemini",
     company: "Google",
-    color: "text-blue-400",
+    color: "bg-blue-500",
+    description: "Powerful multimodal AI for text and images.",
   },
   {
     name: "Grok",
     company: "xAI",
-    color: "text-purple-400",
-  },
-  {
-    name: "DeepSeek",
-    company: "DeepSeek",
-    color: "text-cyan-400",
-  },
-  {
-    name: "Mistral",
-    company: "Mistral AI",
-    color: "text-pink-400",
+    color: "bg-purple-500",
+    description: "Real-time intelligence with fast responses.",
   },
 ];
 
 export default function Models() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24">
-      <div className="text-center">
-        <h2 className="text-4xl font-bold">
-          Access the World's Best AI Models
-        </h2>
+    <section className="mx-auto max-w-7xl px-6 py-28">
+      <SectionTitle
+        title="Supported AI Models"
+        subtitle="Choose the best AI model for every task from one unified workspace."
+      />
 
-        <p className="mt-4 text-gray-400">
-          One workspace. Multiple AI models. Unlimited possibilities.
-        </p>
-      </div>
-
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
-        {models.map((model) => (
-          <div
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {models.map((model, index) => (
+          <motion.div
             key={model.name}
-            className="rounded-3xl border border-white/10 bg-white/5 p-8 transition duration-300 hover:-translate-y-2 hover:border-blue-500"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.15,
+            }}
+            whileHover={{
+              y: -8,
+              scale: 1.03,
+            }}
+            className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
           >
-            <h3 className={`text-3xl font-bold ${model.color}`}>
-              {model.name}
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-2xl font-bold">
+                {model.name}
+              </h3>
 
-            <p className="mt-3 text-gray-400">
-              by {model.company}
+              <div className="flex items-center gap-2">
+                <span className={`h-3 w-3 rounded-full ${model.color}`} />
+                <span className="text-sm text-green-400">
+                  Online
+                </span>
+              </div>
+            </div>
+
+            <p className="mt-2 text-blue-400">
+              {model.company}
             </p>
-          </div>
+
+            <p className="mt-5 leading-7 text-gray-400">
+              {model.description}
+            </p>
+          </motion.div>
         ))}
       </div>
     </section>
