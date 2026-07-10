@@ -3,79 +3,53 @@
 import { motion } from "framer-motion";
 import SectionTitle from "@/components/ui/SectionTitle";
 
-const features = [
-  {
-    icon: "💬",
-    title: "AI Chat",
-    description:
-      "Talk with the world's smartest AI models inside one beautiful workspace.",
-  },
-  {
-    icon: "🎨",
-    title: "Image Generation",
-    description:
-      "Create stunning AI images in seconds with next-generation models.",
-  },
-  {
-    icon: "⚡",
-    title: "Automation",
-    description:
-      "Automate repetitive work and focus on what matters most.",
-  },
-];
+import ChatCard from "./features/ChatCard";
+import ImageCard from "./features/ImageCard";
+import AutomationCard from "./features/AutomationCard";
+import AgentsCard from "./features/AgentsCard";
 
 export default function Features() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-28">
+    <section className="mx-auto max-w-7xl px-6 py-32">
 
       <SectionTitle
-        title="Everything You Need"
-        subtitle="Powerful AI tools designed for creators, developers and businesses."
+        title="One Platform. Endless Possibilities."
+        subtitle="Everything you need to chat, create, automate and collaborate with AI in one premium workspace."
       />
 
-      <div className="grid gap-8 md:grid-cols-3">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="mt-20 grid gap-6 lg:grid-cols-12 auto-rows-[320px]"
+      >
 
-        {features.map((feature, index) => (
+        {/* Large Left */}
 
-          <motion.div
-            key={feature.title}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.6,
-              delay: index * 0.2,
-            }}
-            whileHover={{
-              y: -10,
-              scale: 1.03,
-            }}
-            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all"
-          >
+        <div className="lg:col-span-7 lg:row-span-2">
+          <ChatCard />
+        </div>
 
-            <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
+        {/* Small Top Right */}
 
-            <div className="relative">
+        <div className="lg:col-span-5">
+          <ImageCard />
+        </div>
 
-              <div className="text-6xl">
-                {feature.icon}
-              </div>
+        {/* Bottom Left */}
 
-              <h3 className="mt-6 text-2xl font-bold">
-                {feature.title}
-              </h3>
+        <div className="lg:col-span-5">
+          <AutomationCard />
+        </div>
 
-              <p className="mt-5 leading-7 text-gray-400">
-                {feature.description}
-              </p>
+        {/* Large Bottom Right */}
 
-            </div>
+        <div className="lg:col-span-7">
+          <AgentsCard />
+        </div>
 
-          </motion.div>
-
-        ))}
-
-      </div>
+      </motion.div>
 
     </section>
   );
